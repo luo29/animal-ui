@@ -1,0 +1,80 @@
+.a-tooltip {
+  &-trigger {
+    box-sizing: border-box;
+  }
+  &-text {
+    box-sizing: border-box;
+    position: absolute;
+    visibility: hidden;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #404040;
+    color: white;
+    padding: 8px;
+    border-radius: 2px;
+    z-index: 1000;
+    font-size: 14px;
+    &.why {
+      visibility: visible;
+      &.a-tooltip-top {
+        margin-top: -8px;
+        &::after {
+          content: '';
+          position: absolute;
+          border: 8px solid transparent;
+          top: 100%;
+          border-top-color: #404040;
+        }
+      }
+      &.a-tooltip-bottom {
+        margin-top: 8px;
+        &::after {
+          content: '';
+          position: absolute;
+          border: 8px solid transparent;
+          bottom: 100%;
+          border-bottom-color: #404040;
+        }
+      }
+      &.a-tooltip-left {
+        margin-left: -8px;
+        &::after {
+          content: '';
+          position: absolute;
+          border: 8px solid transparent;
+          left: 100%;
+          border-left-color: #404040;
+        }
+      }
+      &.a-tooltip-right {
+        margin-left: 8px;
+        &::after {
+          content: '';
+          position: absolute;
+          border: 8px solid transparent;
+          right: 100%;
+          border-right-color: #404040;
+        }
+      }
+    }
+  }
+}
+.why-appear, .why-enter {
+  opacity: 0;
+}
+
+.why-appear-active, .why-enter-active {
+  opacity: 1;
+  transition: opacity .8s ease;
+}
+
+/* 离开动画 */
+.why-exit {
+  opacity: 1;
+  transition: all .8s ease;
+}
+
+.why-exit-active {
+  opacity: 0;
+}
