@@ -58,6 +58,7 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-transition-group": "^4.4.6",
     "@umijs/lint": "^4.0.0",
     "dumi": "^2.1.22",
     "eslint": "^8.23.0",
@@ -72,6 +73,9 @@
     "stylelint": "^14.9.1"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.194",
+    "classnames": "^2.3.2",
+    "lodash": "^4.17.21",
     "react-transition-group": "^4.4.5"
   }
 }

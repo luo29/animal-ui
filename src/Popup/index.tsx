@@ -1,16 +1,16 @@
 import classnames from 'classnames';
 import React, { useRef } from 'react';
-import CSSTransition from 'react-transition-group/CSSTransition';
+import { CSSTransition } from 'react-transition-group';
 import Portal from '../common/Portal';
 import useControlled from '../hooks/useControlled';
+import './Tooltip.scss';
 import { useTrigger } from './hooks/useTrigger';
-import './Popup.less';
-import { PopupPlacement, PopupTrigger } from './type';
+import { ToolTipPlacement, TooltipTrigger } from './popupHelper';
 
-export interface TooltipProps {
+export interface PopupProps {
   classname?: string;
-  placement?: PopupPlacement;
-  trigger?: PopupTrigger;
+  placement?: ToolTipPlacement;
+  trigger?: TooltipTrigger;
   // 控制显隐
   visible?: boolean;
 
@@ -22,31 +22,34 @@ export interface TooltipProps {
   destroyOnClose?: boolean;
 
   children?: React.ReactNode;
-
-  attach: string;
+  /**
+   * 挂在的节点
+   */
+  attach?: string;
   /**
    * 当浮层隐藏或显示时触发，`trigger=document` 表示点击非浮层元素触发；`trigger=context-menu` 表示右击触发
    */
-  onVisibleChange?: (visible: boolean) => void;
+  onVisibleChange?: (visible?: boolean) => void;
   delay?: number;
 }
 
-const Popup: React.FC<TooltipProps> = (props) => {
+const Popup: React.FC<PopupProps> = (props) => {
   const {
     children,
     content,
     placement = 'left',
     trigger = 'click',
     attach,
-    ...rest
   } = props;
+
   const [visible, onVisibleChange] = useControlled(
     props,
     'visible',
     props.onVisibleChange,
   );
+
   const portalRef = useRef(null); // portal dom 元素
-  const { tooltipRef, getTriggerNode, position, getPopupProps } = useTrigger({
+  const { tooltipRef, getTriggerNode, getPopupProps } = useTrigger({
     visible,
     onVisibleChange,
     placement,
@@ -54,25 +57,18 @@ const Popup: React.FC<TooltipProps> = (props) => {
   });
 
   const triggerNode = getTriggerNode(children);
+
   return (
     <>
       <Portal attach={attach} ref={portalRef}>
-        <CSSTransition
-          appear
-          in={visible}
-          timeout={5000}
-          classNames="why"
-          nodeRef={tooltipRef}
-        >
+        <CSSTransition in={visible} nodeRef={tooltipRef} timeout={5000} classNames="why">
           <div
-            className={classnames('a-tooltip-text', {
-              why: visible,
-              [`a-tooltip-${placement}`]: placement,
+            className={classnames('g-tooltip-text', {
+              'why': visible,
+              [`g-tooltip-${placement}`]: placement,
             })}
             // eslint-disable-next-line react/no-unknown-property
-
             ref={tooltipRef}
-            {...rest}
             {...getPopupProps()}
           >
             {content}

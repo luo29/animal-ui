@@ -2,6 +2,7 @@
   &-trigger {
     box-sizing: border-box;
   }
+
   &-text {
     box-sizing: border-box;
     position: absolute;
@@ -15,10 +16,13 @@
     border-radius: 2px;
     z-index: 1000;
     font-size: 14px;
+
     &.why {
       visibility: visible;
+
       &.a-tooltip-top {
         margin-top: -8px;
+
         &::after {
           content: '';
           position: absolute;
@@ -27,8 +31,10 @@
           border-top-color: #404040;
         }
       }
+
       &.a-tooltip-bottom {
         margin-top: 8px;
+
         &::after {
           content: '';
           position: absolute;
@@ -37,8 +43,10 @@
           border-bottom-color: #404040;
         }
       }
+
       &.a-tooltip-left {
         margin-left: -8px;
+
         &::after {
           content: '';
           position: absolute;
@@ -47,8 +55,10 @@
           border-left-color: #404040;
         }
       }
+
       &.a-tooltip-right {
         margin-left: 8px;
+
         &::after {
           content: '';
           position: absolute;
@@ -60,11 +70,14 @@
     }
   }
 }
-.why-appear, .why-enter {
+
+.why-appear,
+.why-enter {
   opacity: 0;
 }
 
-.why-appear-active, .why-enter-active {
+.why-appear-active,
+.why-enter-active {
   opacity: 1;
   transition: opacity .8s ease;
 }

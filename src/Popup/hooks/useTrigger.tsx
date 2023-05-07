@@ -1,13 +1,12 @@
 import React, {
-  cloneElement,
-  isValidElement,
   ReactElement,
   ReactNode,
+  cloneElement,
+  isValidElement,
   useRef,
   useState,
 } from 'react';
-import { ToolTipPlacement, TooltipTrigger } from '../type';
-import { getPosition } from './getPosition';
+import { ToolTipPlacement, TooltipTrigger, getPosition } from '../popupHelper';
 
 interface UseTriggerParams {
   visible?: boolean;
@@ -42,7 +41,6 @@ export const useTrigger = (params: UseTriggerParams) => {
       style: {
         top: top + 'px',
         left: left + 'px',
-        position: 'absolute',
       },
       onMouseEnter: () => {
         if (trigger === 'hover') {
@@ -67,7 +65,6 @@ export const useTrigger = (params: UseTriggerParams) => {
   const getTriggerProps = (triggerNode: ReactElement) => {
     return {
       onClick: (e: MouseEvent) => {
-        console.log('onClick');
         if (trigger === 'click') {
           onVisibleChange(!visible);
           handleMouseEvents(e);
@@ -80,8 +77,6 @@ export const useTrigger = (params: UseTriggerParams) => {
         }
       },
       onMouseOver: (e: MouseEvent) => {
-        console.log('onMouse');
-
         if (trigger === 'hover') {
           onVisibleChange(true);
           handleMouseEvents(e);
@@ -105,10 +100,6 @@ export const useTrigger = (params: UseTriggerParams) => {
         <span className="t-trigger"> {children} </span>
       );
 
-    console.log(
-      'triggerNode',
-      cloneElement(triggerNode, getTriggerProps(triggerNode)),
-    );
     return cloneElement(triggerNode, getTriggerProps(triggerNode));
   };
 
